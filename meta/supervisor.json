@@ -1,0 +1,9 @@
+{
+  "process-queue": {
+    "command": "${php.executable} artisan queue:work -vvv",
+    "directory": "${project.basedir}",
+    "user": "www-data",
+    "autorestart": "true"
+  }
+}
+  

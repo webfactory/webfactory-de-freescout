@@ -8,7 +8,9 @@
         <exec checkreturn="true" command="mysql --defaults-file=${mysql.my_cnf} &lt; ${project.metadir}/db/project-setup.sql" />
     </target>
 
-    <!--<target name="project:compile">
+    <target name="project:compile">
         <exec checkreturn="true" passthru="true" command="bin/php artisan freescout:clear-cache" />
-    </target>-->
+        <exec checkreturn="true" passthru="true" command="bin/php artisan freescout:build" />
+        <exec checkreturn="true" passthru="true" command="bin/php artisan freescout:module-build" />
+    </target>
 </project>

@@ -1,0 +1,14 @@
+# Pfad muss gesetzt werden, damit `cron-splunk-wrapper` (für Shell-Skripte) gefunden wird
+PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/share/webfactory-devops/bin
+
+# Das scheint eine Art Meta-Job zu sein, der auch die Queue starten würde:
+#* * * * * www-admin 'cd {{ project.property('project.basedir') }}; bin/php artisan schedule:run >> /dev/null 2>&1'
+
+# Prüfe, dass das E-Mail-Abholen regelmäßig klappt
+2 * * * * www-admin cron-splunk-wrapper freescout:fetch-monitor 'cd {{ project.property('project.basedir') }}; bin/php artisan freescout:fetch-monitor >> /dev/null 2>&1'
+
+# Dieser Job prüft irgendwas im Zusammenhang damit, wer gerade "conversations" geöffnet hat
+* * * * * www-admin cron-splunk-wrapper freescout:check-conv-viewers 'cd {{ project.property('project.basedir') }}; bin/php artisan freescout:check-conv-viewers >> /dev/null 2>&1'
+
+# Dieser Job holt Mails
+* * * * * www-admin cd {{ project.property('project.basedir') }} && bin/php artisan freescout:fetch-emails > {{ project.property('project.logdir') }}/fetch-emails.log 2>&1
