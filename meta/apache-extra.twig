@@ -1,0 +1,6 @@
+DirectoryIndex index.php
+
+<Directory "{{ project.property('project.webdir') }}">
+    Require all granted
+    FallbackResource /index.php
+</Directory>

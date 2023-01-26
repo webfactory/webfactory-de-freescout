@@ -33,3 +33,7 @@ Thumbs.db
 /tools
 .well-known
 /resources/lang/module.*
+
+public/.user.ini
+/logs
+/conf
